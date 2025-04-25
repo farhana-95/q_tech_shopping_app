@@ -44,6 +44,7 @@ class SortOptionsBottomSheet extends ConsumerWidget {
               Navigator.pop(context);
             },
           ),
+          SizedBox(height: 15,)
         ],
       ),
     );

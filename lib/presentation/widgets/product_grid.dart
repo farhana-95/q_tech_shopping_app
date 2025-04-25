@@ -56,7 +56,6 @@ class _ProductGridState extends ConsumerState<ProductGrid> {
 
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset: true,
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
@@ -162,6 +161,7 @@ class _ProductGridState extends ConsumerState<ProductGrid> {
                 contentPadding: const EdgeInsets.symmetric(vertical: 10),
               ),
               onChanged: _onSearchChanged,
+              autofocus: true,
             ),
           ),
         ),
@@ -170,9 +170,9 @@ class _ProductGridState extends ConsumerState<ProductGrid> {
             showModalBottomSheet(
               context: context,
               isScrollControlled: true,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-              ),
+              // shape: const RoundedRectangleBorder(
+              //   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+              // ),
               builder: (context) => const SortOptionsBottomSheet(),
             );
           },
