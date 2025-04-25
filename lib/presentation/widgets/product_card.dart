@@ -4,6 +4,7 @@ import '../../domain/models/products.dart';
 
 class ProductCard extends StatefulWidget {
   final Product product;
+
   const ProductCard({super.key, required this.product});
 
   @override
@@ -30,31 +31,33 @@ class _ProductCardState extends State<ProductCard> {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: widget.product.images?.first != null && widget.product.images!.isNotEmpty
+                  child: widget.product.images?.first != null &&
+                          widget.product.images!.isNotEmpty
                       ? Image.network(
-                    widget.product.images!.first,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) => Container(
-                      color: Colors.grey[200],
-                      child: const Center(
-                        child: Icon(
-                          Icons.image,
-                          size: 50,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
-                  )
+                          widget.product.images!.first,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) =>
+                              Container(
+                            color: Colors.grey[200],
+                            child: const Center(
+                              child: Icon(
+                                Icons.image,
+                                size: 50,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ),
+                        )
                       : Container(
-                    color: Colors.grey[200],
-                    child: const Center(
-                      child: Icon(
-                        Icons.image,
-                        size: 50,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
+                          color: Colors.grey[200],
+                          child: const Center(
+                            child: Icon(
+                              Icons.image,
+                              size: 50,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
                 ),
                 Positioned(
                   top: 10,
@@ -99,50 +102,64 @@ class _ProductCardState extends State<ProductCard> {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        '\$${discountedPrice.toStringAsFixed(2)}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
-                        ),
-                      ),
-                      const SizedBox(width: 6),
-                      Text(
-                        '\$${price.toStringAsFixed(2)}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 10,
-                          color: Colors.grey,
-                          decoration: TextDecoration.lineThrough,
-                        ),
-                      ),
-                      const SizedBox(width: 7,),
-                      Text(
-                        '$discountPercent% OFF',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 10,
-                          color: Colors.red,
-                        ),
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4.0),
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        return Row(
+                          children: [
+                            Text(
+                              '\$${discountedPrice.toStringAsFixed(2)}',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14,
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            Flexible(
+                              child: Text(
+                                '\$${price.toStringAsFixed(2)}',
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 10,
+                                  color: Colors.grey,
+                                  decoration: TextDecoration.lineThrough,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 7),
+                            Flexible(
+                              child: Text(
+                                '$discountPercent% OFF',
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 10,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
                   ),
-                  Row(
-                    children: [
-                      Row(
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      return Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 4, vertical: 2),
-                              decoration: BoxDecoration(
-                                color: Colors.amber,
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                              child: const Icon(Icons.star_rounded,
-                                  color: Colors.white, size: 14)),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 4, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: Colors.amber,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: const Icon(Icons.star_rounded,
+                                color: Colors.white, size: 14),
+                          ),
                           const SizedBox(width: 5),
                           Text(
                             "${widget.product.rating}",
@@ -152,18 +169,21 @@ class _ProductCardState extends State<ProductCard> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
+                          const SizedBox(width: 4),
+                          Flexible(
+                            child: Text(
+                              "(${widget.product.reviews?.length ?? 0})",
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: Colors.grey[600],
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
                         ],
-                      ),
-                      const SizedBox(width: 4),
-                      Text(
-                        "(${widget.product.reviews?.length})",
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
+                      );
+                    },
                   ),
                 ],
               ),

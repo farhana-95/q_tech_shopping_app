@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// Import your providers and models
 import '../providers/product_provider.dart';
 
 class SortOptionsBottomSheet extends ConsumerWidget {
