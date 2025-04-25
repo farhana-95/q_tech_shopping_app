@@ -8,6 +8,7 @@ A Flutte project using DummyJSON API for products.
 - Implemented clean architecture for the structure.
 - Implemented Riverpod for state management and pagination.
 - Implemented searching and sorting feature.
+- Added a widget test case.
 
 ## App Screenshot:
 - Home Screen
